@@ -27,27 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private var model: Renderable? = null
     var cubeRenderable: ModelRenderable? = null
-    //var res = getResources()
 
-    /*private val onTapPlane = arFragment.setOnTapArPlaneListener { hitResult,plane, motionEvent ->
-        arFragment.arSceneView.scene.addChild(AnchorNode(hitResult.createAnchor()).apply {
-            // Create the transformable model and add it to the anchor.
-            addChild(TransformableNode(arFragment.transformationSystem).apply {
-                val model = createModel(1)
-
-                renderable = cubeRenderable
-                //renderableInstance.animate(true).start()
-                // Add child model relative the a parent model
-                addChild(Node().apply {
-                    // Define the relative position
-                    localPosition = Vector3(0.0f, 1f, 0.0f)
-                    // Define the relative scale
-                    localScale = Vector3(0.7f, 0.7f, 0.7f)
-                    //renderable = modelView
-                })
-            })
-        })
-    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         arFragment = (supportFragmentManager.findFragmentById(R.id.arFragment) as ArFragment)
 
-
-        /*arFragment.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
-
-            val anchor = hitResult.createAnchor()
-            val anchorNode = AnchorNode(anchor)
-            anchorNode.setParent(arFragment.arSceneView.scene)
-            createModel(anchorNode, 1)*/
 
         arFragment.setOnTapArPlaneListener { hitResult,plane, motionEvent ->
 
@@ -71,11 +44,9 @@ class MainActivity : AppCompatActivity() {
 
                 // Create the transformable model and add it to the anchor.
                 addChild(TransformableNode(arFragment.transformationSystem).apply {
-                    //val model = createModel(1)
 
                     renderable = cubeRenderable
-                    //renderableInstance.setCulling(false)
-                    //renderableInstance.animate(true).start()
+
                     // Add child model relative the a parent model
                     addChild(Node().apply {
                         // Define the relative position
@@ -93,9 +64,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setModel() {
 
-
         ModelRenderable.builder()
-            .setSource(this, Uri.parse("models/cubo3.glb") )
+            .setSource(this, Uri.parse("models/cuboRosso.glb") )
             .setIsFilamentGltf(true)
             .build()
             .thenAccept { model: ModelRenderable -> cubeRenderable = model }
@@ -106,37 +76,6 @@ class MainActivity : AppCompatActivity() {
             }
 
     }
-
-    /*
-    interface MyCallable<V> : Callable<V> {
-        fun setStdIn(`in`: InputStream?)
-        fun setStdOut(out: InputStream?)
-    }
-
-    class CallableTask : MyCallable<InputStream?> {
-        private var input :InputStream? = null
-        private var out: InputStream? = null
-
-        override fun setStdIn(inp: InputStream?) {
-            input = inp
-        }
-
-        override fun setStdOut(out: InputStream?) {
-            this.out = out
-        }
-
-        @Throws(Exception::class)
-
-        override fun call(): InputStream? {
-
-            return this.out
-        }
-
-
-
-
-    }
-*/
 
 }
 
