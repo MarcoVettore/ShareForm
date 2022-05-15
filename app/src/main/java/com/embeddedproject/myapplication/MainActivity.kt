@@ -3,7 +3,6 @@ package com.embeddedproject.myapplication
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.ar.sceneform.AnchorNode
@@ -13,9 +12,7 @@ import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
-import com.gorisse.thomas.sceneform.util.getResourceUri
-import java.io.File
-import java.io.FileOutputStream
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +35,17 @@ class MainActivity : AppCompatActivity() {
 
         arFragment.setOnTapArPlaneListener { hitResult,plane, motionEvent ->
 
+            /*
+            setModel()
+
+            val anchor = hitResult.createAnchor()
+            val anchorNode = AnchorNode(anchor)
+            val tn = TransformableNode(arFragment.transformationSystem)
+            tn.parent = anchorNode
+            tn.renderable = cubeRenderable
+            tn.select()
+
+            */
             arFragment.arSceneView.scene.addChild(AnchorNode(hitResult.createAnchor()).apply {
 
                 setModel()
@@ -65,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     private fun setModel() {
 
         ModelRenderable.builder()
-            .setSource(this, Uri.parse("models/cuboRosso.glb") )
+            .setSource(this, Uri.parse("models/spada.glb") )
             .setIsFilamentGltf(true)
             .build()
             .thenAccept { model: ModelRenderable -> cubeRenderable = model }
